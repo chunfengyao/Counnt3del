@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Counnt3del
+class Count3del
 {
 	public static void main(String [] args)
 	{
@@ -8,8 +8,17 @@ class Counnt3del
 		Scanner sc = new Scanner(System.in);
 		final int Totle=sc.nextInt();
 		Child L,p;
+		L=null;
 		ChildCircle C = new ChildCircle();
-		L=C.IniChildCircle(Totle);
+		try
+		{
+			L=C.IniChildCircle(Totle);
+		}
+		catch (AnZeroException e)
+		{
+			e.Message("\n您输入了一个小于1的数！！！");
+			System.exit(1);
+		}
 		int i,j,k,m;
 		k=Totle;
 		p=L;
@@ -54,10 +63,24 @@ class Child
 	}
 }
 
+class AnZeroException extends Exception
+{
+
+	public void Message(String a)
+	{
+		System.out.println(a);
+	}
+}
+
+
 class ChildCircle
 {
-	Child IniChildCircle(int a)
+	Child IniChildCircle(int a) throws AnZeroException
 	{
+		if (a<1)
+		{
+			throw new AnZeroException();
+		}
 		Child L=new Child();
 		L.LeftChild=null;
 		L.id=1;
